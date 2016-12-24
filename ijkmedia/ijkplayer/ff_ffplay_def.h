@@ -63,7 +63,7 @@
 #include "ff_ffpipenode.h"
 #include "ijkmeta.h"
 
-#define DEFAULT_HIGH_WATER_MARK_IN_BYTES        (256 * 1024)
+#define DEFAULT_HIGH_WATER_MARK_IN_BYTES        (128 * 1024)
 
 /*
  * START: buffering after prepared/seeked
@@ -71,17 +71,17 @@
  * MAX:   ...
  */
 #define DEFAULT_FIRST_HIGH_WATER_MARK_IN_MS     (100)
-#define DEFAULT_NEXT_HIGH_WATER_MARK_IN_MS      (1 * 1000)
-#define DEFAULT_LAST_HIGH_WATER_MARK_IN_MS      (5 * 1000)
+#define DEFAULT_NEXT_HIGH_WATER_MARK_IN_MS      (1 * 100)
+#define DEFAULT_LAST_HIGH_WATER_MARK_IN_MS      (1 * 100)
 
-#define BUFFERING_CHECK_PER_BYTES               (512)
-#define BUFFERING_CHECK_PER_MILLISECONDS        (500)
+#define BUFFERING_CHECK_PER_BYTES               (128)
+#define BUFFERING_CHECK_PER_MILLISECONDS        (100)
 
-#define MAX_QUEUE_SIZE (15 * 1024 * 1024)
+#define MAX_QUEUE_SIZE (1 * 1024 * 1024)
 #ifdef FFP_MERGE
-#define MIN_FRAMES 25
+#define MIN_FRAMES 5
 #endif
-#define DEFAULT_MIN_FRAMES  50000
+#define DEFAULT_MIN_FRAMES  5
 #define MIN_MIN_FRAMES      5
 #define MAX_MIN_FRAMES      50000
 #define MIN_FRAMES (ffp->dcc.min_frames)
@@ -386,6 +386,11 @@ typedef struct VideoState {
 
     volatile int latest_seek_load_serial;
     volatile int64_t latest_seek_load_start_at;
+
+    // Add by yinghuihong
+    // for low delay time with live play(realtime), control videoq/audioq duration < max_cached_duration
+    // realtime set to 0, max_cached_duration = 0 means is playback
+    int max_cached_duration;
 } VideoState;
 
 /* options specified by the user */

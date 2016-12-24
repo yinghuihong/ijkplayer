@@ -139,6 +139,9 @@ public class VideoActivity extends AppCompatActivity implements TracksFragment.I
         mVideoView = (IjkVideoView) findViewById(R.id.video_view);
         mVideoView.setMediaController(mMediaController);
         mVideoView.setHudView(mHudView);
+
+//        mVideoPath = "rtmp://203.207.99.19:1935/live/CCTV5";
+        mVideoPath = "rtsp://106.75.22.76:1935/Monitor/DDB5637412350.sdp";
         // prefer mVideoPath
         if (mVideoPath != null)
             mVideoView.setVideoPath(mVideoPath);

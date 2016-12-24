@@ -74,7 +74,7 @@ static const AVOption ffp_context_options[] = {
     { "loop",                           "set number of times the playback shall be looped",
         OPTION_OFFSET(loop),            OPTION_INT(1, INT_MIN, INT_MAX) },
     { "infbuf",                         "don't limit the input buffer size (useful with realtime streams)",
-        OPTION_OFFSET(infinite_buffer), OPTION_INT(0, 0, 1) },
+        OPTION_OFFSET(infinite_buffer), OPTION_INT(1, 0, 1) },
     { "framedrop",                      "drop frames when cpu is too slow",
         OPTION_OFFSET(framedrop),       OPTION_INT(0, -1, 120) },
     { "seek-at-start",                  "set offset of player should be seeked",
@@ -134,7 +134,7 @@ static const AVOption ffp_context_options[] = {
                    DEFAULT_LAST_HIGH_WATER_MARK_IN_MS) },
 
     { "packet-buffering",                   "pause output until enough packets have been read after stalling",
-        OPTION_OFFSET(packet_buffering),    OPTION_INT(1, 0, 1) },
+        OPTION_OFFSET(packet_buffering),    OPTION_INT(0, 0, 1) },
     { "sync-av-start",                      "synchronise a/v start time",
         OPTION_OFFSET(sync_av_start),       OPTION_INT(1, 0, 1) },
     { "iformat",                            "force format",
